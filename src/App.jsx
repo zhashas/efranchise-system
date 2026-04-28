@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Public pages
 import LandingPage from "./pages/LandingPage";
@@ -30,7 +31,14 @@ function App() {
         {/* ADMIN ROUTES - Protected, admin-only access */}
         {/* ============================================================ */}
 
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
         {/* More admin routes will be added here later:
             /admin/applications
             /admin/staff
@@ -45,7 +53,14 @@ function App() {
         {/* APPLICANT ROUTES - Protected, applicant-only access */}
         {/* ============================================================ */}
 
-        <Route path="/applicant/dashboard" element={<ApplicantDashboard />} />
+        <Route
+          path="/applicant/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["applicant"]}>
+              <ApplicantDashboard />
+            </ProtectedRoute>
+          }
+        />
         {/* More applicant routes will be added here later:
             /applicant/apply
             /applicant/applications
@@ -58,7 +73,14 @@ function App() {
         {/* STAFF ROUTES - Protected, staff-only access */}
         {/* ============================================================ */}
 
-        <Route path="/staff/dashboard" element={<StaffDashboard />} />
+        <Route
+          path="/staff/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["staff"]}>
+              <StaffDashboard />
+            </ProtectedRoute>
+          }
+        />
         {/* More staff routes will be added here later:
             /staff/applications
             /staff/appointments
