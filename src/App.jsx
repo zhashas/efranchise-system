@@ -1,48 +1,79 @@
-import { useEffect, useState } from "react";
-import { supabase } from "./lib/supabaseClient";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+// Public pages
+import LandingPage from "./pages/LandingPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+// Admin pages
+import AdminDashboard from "./pages/admin/Dashboard";
+
+// Applicant pages
+import ApplicantDashboard from "./pages/applicant/Dashboard";
+
+// Staff pages
+import StaffDashboard from "./pages/staff/Dashboard";
 
 function App() {
-  const [connected, setConnected] = useState(null);
-
-  useEffect(() => {
-    // Try to reach Supabase by checking auth session
-    const testConnection = async () => {
-      const { error } = await supabase.auth.getSession();
-      if (error) {
-        setConnected(false);
-      } else {
-        setConnected(true);
-      }
-    };
-    testConnection();
-  }, []);
-
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-xl shadow text-center">
-        <h1 className="text-2xl font-bold text-orange-500 mb-4">
-          eFranchise System
-        </h1>
-        <p className="text-gray-500 mb-4">San Jose, Occidental Mindoro</p>
-        <div className="mt-4">
-          {connected === null && (
-            <span className="text-yellow-500 font-semibold">
-              ⏳ Testing Supabase connection...
-            </span>
-          )}
-          {connected === true && (
-            <span className="text-green-500 font-semibold">
-              ✅ Supabase connected successfully!
-            </span>
-          )}
-          {connected === false && (
-            <span className="text-red-500 font-semibold">
-              ❌ Connection failed. Check your .env file.
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* ============================================================ */}
+        {/* PUBLIC ROUTES - Anyone can access these */}
+        {/* ============================================================ */}
+
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* ============================================================ */}
+        {/* ADMIN ROUTES - Protected, admin-only access */}
+        {/* ============================================================ */}
+
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        {/* More admin routes will be added here later:
+            /admin/applications
+            /admin/staff
+            /admin/appointments
+            /admin/notifications
+            /admin/reports
+            /admin/logs
+            /admin/settings
+        */}
+
+        {/* ============================================================ */}
+        {/* APPLICANT ROUTES - Protected, applicant-only access */}
+        {/* ============================================================ */}
+
+        <Route path="/applicant/dashboard" element={<ApplicantDashboard />} />
+        {/* More applicant routes will be added here later:
+            /applicant/apply
+            /applicant/applications
+            /applicant/appointments
+            /applicant/notifications
+            /applicant/settings
+        */}
+
+        {/* ============================================================ */}
+        {/* STAFF ROUTES - Protected, staff-only access */}
+        {/* ============================================================ */}
+
+        <Route path="/staff/dashboard" element={<StaffDashboard />} />
+        {/* More staff routes will be added here later:
+            /staff/applications
+            /staff/appointments
+            /staff/notifications
+            /staff/reports
+            /staff/settings
+        */}
+
+        {/* ============================================================ */}
+        {/* 404 CATCH-ALL - Any undefined route goes to landing page */}
+        {/* ============================================================ */}
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
