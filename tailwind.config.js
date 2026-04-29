@@ -3,16 +3,14 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      // Custom colors matching the eFranchise System theme
       colors: {
         brand: {
-          orange: "#F97316", // primary orange
+          orange: "#F97316",
           "orange-dark": "#EA580C",
-          navy: "#1E3A5F", // dark navy blue
+          navy: "#1E3A5F",
           "navy-light": "#1E4D9E",
         },
       },
-      // Custom font sizes for consistency
       fontSize: {
         "2xs": "0.625rem",
       },
