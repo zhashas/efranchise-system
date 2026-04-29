@@ -1,10 +1,12 @@
-function StaffDashboard() {
+import React from 'react';
+
+const Dashboard = () => {
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold text-navy-900">Staff Dashboard</h1>
-      <p className="text-gray-500 mt-2">Coming soon...</p>
+      <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
+      <p className="text-gray-500 mt-4">Coming soon...</p>
     </div>
   );
-}
+};
 
-export default StaffDashboard;
+export default Dashboard;

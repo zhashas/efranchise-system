@@ -2,58 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Apply Inter font globally */
-body {
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
-}
-
-/* Scrollbar styling for better aesthetics */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-/* Smooth focus outline for accessibility */
-*:focus-visible {
-  outline: 2px solid #f97316;
-  outline-offset: 2px;
-}
-
-/* Custom utility classes */
-@layer utilities {
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+/* ── Global base styles ── */
+@layer base {
+  * {
+    box-sizing: border-box;
   }
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family:
+      "Segoe UI",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-orange-400;
   }
 }
 
-/* Loading spinner animation */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+/* ── Reusable utility classes ── */
+@layer components {
+  /* Primary button */
+  .btn-primary {
+    @apply bg-orange-500 hover:bg-orange-600 text-white
+           font-semibold py-2.5 px-5 rounded-lg
+           transition duration-200 disabled:opacity-60
+           disabled:cursor-not-allowed;
   }
-}
 
-.animate-spin {
-  animation: spin 1s linear infinite;
+  /* Secondary button */
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700
+           font-semibold py-2.5 px-5 rounded-lg
+           transition duration-200;
+  }
+
+  /* Danger button */
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-600 text-white
+           font-semibold py-2.5 px-5 rounded-lg
+           transition duration-200;
+  }
+
+  /* Standard input field */
+  .input-field {
+    @apply w-full border border-gray-300 rounded-lg
+           px-4 py-2.5 text-sm
+           focus:outline-none focus:ring-2
+           focus:ring-orange-400 focus:border-orange-400
+           transition duration-200;
+  }
+
+  /* Card container */
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
+  }
+
+  /* Status badge base */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5
+           rounded-full text-xs font-semibold;
+  }
 }
